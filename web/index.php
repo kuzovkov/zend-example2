@@ -6,42 +6,47 @@
  * Time: 12:24
  */
 
-$pages = 'pages/';
+require_once '../include/config.php';
+require_once '../include/bootstrap.php';
+
+$controllers = 'controllers/';
 $scripts = 'scripts/';
 $root_dir = ''; /*если скрипт не в корневом каталоге сервера*/
 $routes = array(
-    '/' => $pages . 'index.php',
+    '/' => $controllers . 'index.php',
+    '404' => $controllers . '404.php',
+    '/addposts' => $controllers . 'addposts.php',
 
     /*
 
-    '/file' => $pages . 'file.php',
-    '/login' => $pages . 'login.php',
+    '/file' => $controllers . 'file.php',
+    '/login' => $controllers . 'login.php',
     '/auth' => $scripts . 'auth.php',
-    '/settings' => $pages . 'settings.php',
-    '404' => $pages . '404.php',
+    '/settings' => $controllers . 'settings.php',
+    '404' => $controllers . '404.php',
     '/upload' => $scripts . 'upload.php',
     '/get_email_data' => $scripts . 'get_email_data.php',
     '/del-all' => array($scripts . 'action.php',array('action' => 'del-all')),
     '/mark-as-nosend' => array($scripts . 'action.php',array('action' => 'mark-as-nosend')),
     '/mark-as-send' => array($scripts . 'action.php',array('action' => 'mark-as-send')),
     '/del-sended' => array($scripts . 'action.php',array('action' => 'del-sended')),
-    '/set-data' => $pages . '/email_form.php',
-    '/sended' => array($pages . 'index.php', array('type'=>'sended')),
-    '/nosended' => array($pages . 'index.php', array('type'=>'nosended')),
+    '/set-data' => $controllers . '/email_form.php',
+    '/sended' => array($controllers . 'index.php', array('type'=>'sended')),
+    '/nosended' => array($controllers . 'index.php', array('type'=>'nosended')),
     '/reset-db' => array($scripts . 'action.php', array('action' => 'reset-db')),
-    '/get-list-emails' => $pages . 'list_data.php',
+    '/get-list-emails' => $controllers . 'list_data.php',
     '/send-email' => array($scripts . 'action.php', array('action' => 'send-email')),
-    '/images' => $pages . 'img.php',
+    '/images' => $controllers . 'img.php',
     '/img-upload' => $scripts . 'img_upload.php',
     '/del-images' => $scripts . 'img_del.php',
-    '/save-data' => $scripts . 'save_data.php'
+    '/save-data' => $scripts . 'save_data.php'echo $n; exit();
 
     */
 );
 
 
 
-
+/*роутинг*/
 if (isset($_SERVER['REQUEST_URI'])){
     $real_uri = $_SERVER['REQUEST_URI'];
     if (($p = strpos($real_uri, '?')) === false){

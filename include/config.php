@@ -12,7 +12,7 @@ $MYSQL_USER 	= "root";
 $MYSQL_PASSWORD = "rootroot";
 $MYSQL_DB 		= "test3";
 
-$root = dirname(__FILE__);
+$root = substr(dirname(__FILE__), 0, strrpos(dirname(__FILE__), '/'));
 
 $config = array(
     // Настройки соединения с БД
@@ -31,13 +31,13 @@ $config = array(
         ),
     ),
 
-    'path' => array('library' => $root . '/Zend')
+    'path' => array(
+        'library' => $root . '/include/Zend',
+        'root' => $root
+        )
 );
 
 
-
-
 $paths = implode(':', array ('/opt/ZendFramework-1.12.0/library', $config['path']['library'], get_include_path()));
-
 // Пути по которым происходит поиск подключаемых файлов, это папка библиотек, моделей и системных файлов
 set_include_path($paths);
