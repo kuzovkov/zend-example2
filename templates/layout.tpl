@@ -5,7 +5,7 @@
     <title>Тестовый сайт</title>
     <meta name="keywords" content="free css templates, blog design, 2-column, web design, CSS, HTML" />
     <meta name="description" content="Design Blog - free css template, 2-column blog layout" />
-    <link href="css/templatemo_style.css" rel="stylesheet" type="text/css" />
+    <link href="/css/templatemo_style.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css" media="screen"/>
     <script type="text/javascript" src="/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="/fancybox/jquery.fancybox.pack.js"></script>

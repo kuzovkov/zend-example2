@@ -5,9 +5,10 @@
  * Date: 11.11.16
  * Time: 12:24
  */
-
+session_start();
 require_once '../include/config.php';
 require_once '../include/bootstrap.php';
+require_once ('../include/Auth.php');
 
 $controllers = 'controllers/';
 $scripts = 'scripts/';
@@ -16,6 +17,14 @@ $routes = array(
     '/' => $controllers . 'index.php',
     '404' => $controllers . '404.php',
     '/addposts' => $controllers . 'addposts.php',
+    '/admin/' =>$controllers . 'admin/index.php',
+    '/admin' =>$controllers . 'admin/index.php',
+    '/login' => $controllers . 'admin/login.php',
+    '/logout' => $controllers . 'admin/logout.php',
+    '/admin/upload' =>$controllers . 'admin/upload.php',
+    '/admin/upload2' =>$controllers . 'admin/upload2.php',
+    '/admin/backup' =>$controllers . 'admin/backup.php',
+    '/admin/recovery' =>$controllers . 'admin/recovery.php',
 
     /*
 

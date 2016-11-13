@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2016-11-12 23:49:24
+/* Smarty version 3.1.30, created on 2016-11-14 01:05:52
   from "/var/www/vhosts/test5/templates/posts.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_58278054c80005_06266434',
+  'unifunc' => 'content_5828e3c0c369d6_10978583',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '7ba7df0dbb6e34ec15779cb39ab8d471fe7c2ee8' => 
     array (
       0 => '/var/www/vhosts/test5/templates/posts.tpl',
-      1 => 1478983242,
+      1 => 1478986284,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_58278054c80005_06266434 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5828e3c0c369d6_10978583 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_truncate')) require_once '/var/www/vhosts/test5/include/Smarty/plugins/modifier.truncate.php';
 if ($_smarty_tpl->tpl_vars['posts']->value) {?>
     <?php
@@ -31,8 +31,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['post']->value) {
 
     <div class="post_box">
 
-        <h2><?php echo $_smarty_tpl->tpl_vars['post']->value['id'];?>
-<a href="#"><?php echo preg_replace('!<[^>]*?>!', ' ', $_smarty_tpl->tpl_vars['post']->value['title']);?>
+        <h2><a href="#"><?php echo preg_replace('!<[^>]*?>!', ' ', $_smarty_tpl->tpl_vars['post']->value['title']);?>
 </a></h2> <?php $_smarty_tpl->_assignInScope('tags', $_smarty_tpl->tpl_vars['post']->value['tags']);
 ?>
         <div class="news_meta">Posted: <?php echo $_smarty_tpl->tpl_vars['post']->value['updated_at'];?>

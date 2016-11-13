@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2016-11-12 22:59:13
+/* Smarty version 3.1.30, created on 2016-11-14 01:05:52
   from "/var/www/vhosts/test5/templates/layout.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5827749179e1d9_35050210',
+  'unifunc' => 'content_5828e3c0b38643_80097366',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'f0e1e11881cdbe3038709687b7e6736d184e6db5' => 
     array (
       0 => '/var/www/vhosts/test5/templates/layout.tpl',
-      1 => 1478980738,
+      1 => 1479073790,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5827749179e1d9_35050210 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5828e3c0b38643_80097366 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, false);
 ?>
@@ -31,7 +31,7 @@ $_smarty_tpl->inheritance->init($_smarty_tpl, false);
     <title>Тестовый сайт</title>
     <meta name="keywords" content="free css templates, blog design, 2-column, web design, CSS, HTML" />
     <meta name="description" content="Design Blog - free css template, 2-column blog layout" />
-    <link href="css/templatemo_style.css" rel="stylesheet" type="text/css" />
+    <link href="/css/templatemo_style.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css" media="screen"/>
     <?php echo '<script'; ?>
  type="text/javascript" src="/js/jquery-1.11.0.min.js"><?php echo '</script'; ?>
@@ -88,7 +88,7 @@ $_smarty_tpl->inheritance->init($_smarty_tpl, false);
 
             <div id="templatemo_content">
                 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_36919271558277491790a04_19998470', "content");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_8823838145828e3c0b2bca4_70305778', "content");
 ?>
 
 
@@ -158,7 +158,7 @@ $_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_369192715582774917
 </body>
 </html><?php }
 /* {block "content"} */
-class Block_36919271558277491790a04_19998470 extends Smarty_Internal_Block
+class Block_8823838145828e3c0b2bca4_70305778 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 }
