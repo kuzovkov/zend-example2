@@ -26,13 +26,16 @@ $routes = array(
     '/admin/recovery' => array('controller' => 'admin', 'action'=>'recovery'),
     '/admin/showlist' => array('controller' => 'admin', 'action'=>'showlist'),
     '/admin/create' => array('controller' => 'admin', 'action'=>'create'),
+    '/admin/imglist' => array('controller' => 'admin', 'action'=>'imglist'),
+    '/admin/delimages' => array('controller' => 'admin', 'action'=>'delimages'),
+    '/admin/imglist_select' => array('controller' => 'admin', 'action'=>'imglist_select'),
 );
 
 
 /*роутинг*/
 if (isset($_SERVER['REQUEST_URI'])){
     $real_uri = $_SERVER['REQUEST_URI'];
-    //echo $real_uri;
+
     if (($p = strpos($real_uri, '?')) === false){
         $uri = substr($real_uri, 0);
     }else{
@@ -42,6 +45,7 @@ if (isset($_SERVER['REQUEST_URI'])){
     if (strlen($root_dir) && strpos($uri, $root_dir) === 0){
         $uri = substr($uri, strlen($root_dir));
     }
+
     if (isset($routes[$uri]) && is_array($routes[$uri])){
         if (isset($routes[$uri]['controller'])){
             $controller_name = $routes[$uri]['controller'];

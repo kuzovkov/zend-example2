@@ -6,19 +6,14 @@
             {foreach $models as $model}
             <tr>
                 <td>
-                    <p><a href="#">{$model->title}</a></p>
+                    <p><a href="/admin/showlist/?entity={$model->entity}">{$model->title}</a></p>
                 </td>
                 <td>
-                    <p><form method="post" action="/admin/create"">
-                    <input type="hidden" name="entity" value="{$model->entity}"/>
-                    <button>Create New</button></form></p>
+                    <p><a href="""/admin/create/?entity={$model->entity}"><button>Create New</button></a</p>
                 </td>
 
                 <td>
-                    <p><form method="post" action="/admin/showlist">
-                        <input type="hidden" name="entity" value="{$model->entity}"/>
-                        <button>List</button>
-                    </form></p>
+                    <p><a href="/admin/showlist/?entity={$model->entity}"><button>List</button></a></p>
                 </td>
             </tr>
             {/foreach}
