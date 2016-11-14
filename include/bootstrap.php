@@ -23,7 +23,7 @@ Zend_Registry::set('db', $db);
 
 $smarty = new Smarty();
 $smarty->config_dir = $config->path->root . '/configs/';
-$smarty->template_dir = $config->path->root . '/templates/';
+$smarty->template_dir = $config->path->root . '/src/templates/';
 $smarty->compile_dir = $config->path->root . '/templates_c/';
 $smarty->plugins_dir = $config->path->root . '/include/Smarty/plugins/';
 //$smarty->caching = Smarty::CACHING_LIFETIME_CURRENT;

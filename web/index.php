@@ -6,58 +6,33 @@
  * Time: 12:24
  */
 session_start();
-require_once '../include/config.php';
-require_once '../include/bootstrap.php';
-require_once ('../include/Auth.php');
+require_once ('../include/common.inc.php');
 
-$controllers = 'controllers/';
-$scripts = 'scripts/';
+$config = Zend_Registry::get('config');
+$controllers = $config->path->controllers_dir;
 $root_dir = ''; /*если скрипт не в корневом каталоге сервера*/
+
 $routes = array(
-    '/' => $controllers . 'index.php',
-    '404' => $controllers . '404.php',
-    '/addposts' => $controllers . 'addposts.php',
-    '/admin/' =>$controllers . 'admin/index.php',
-    '/admin' =>$controllers . 'admin/index.php',
-    '/login' => $controllers . 'admin/login.php',
-    '/logout' => $controllers . 'admin/logout.php',
-    '/admin/upload' =>$controllers . 'admin/upload.php',
-    '/admin/upload2' =>$controllers . 'admin/upload2.php',
-    '/admin/backup' =>$controllers . 'admin/backup.php',
-    '/admin/recovery' =>$controllers . 'admin/recovery.php',
-
-    /*
-
-    '/file' => $controllers . 'file.php',
-    '/login' => $controllers . 'login.php',
-    '/auth' => $scripts . 'auth.php',
-    '/settings' => $controllers . 'settings.php',
-    '404' => $controllers . '404.php',
-    '/upload' => $scripts . 'upload.php',
-    '/get_email_data' => $scripts . 'get_email_data.php',
-    '/del-all' => array($scripts . 'action.php',array('action' => 'del-all')),
-    '/mark-as-nosend' => array($scripts . 'action.php',array('action' => 'mark-as-nosend')),
-    '/mark-as-send' => array($scripts . 'action.php',array('action' => 'mark-as-send')),
-    '/del-sended' => array($scripts . 'action.php',array('action' => 'del-sended')),
-    '/set-data' => $controllers . '/email_form.php',
-    '/sended' => array($controllers . 'index.php', array('type'=>'sended')),
-    '/nosended' => array($controllers . 'index.php', array('type'=>'nosended')),
-    '/reset-db' => array($scripts . 'action.php', array('action' => 'reset-db')),
-    '/get-list-emails' => $controllers . 'list_data.php',
-    '/send-email' => array($scripts . 'action.php', array('action' => 'send-email')),
-    '/images' => $controllers . 'img.php',
-    '/img-upload' => $scripts . 'img_upload.php',
-    '/del-images' => $scripts . 'img_del.php',
-    '/save-data' => $scripts . 'save_data.php'echo $n; exit();
-
-    */
+    '/' => array('controller' => 'index', 'action'=>'index'),
+    '404' => array('controller' => '_404', 'action'=>'index'),
+    '/addposts' => array('controller' => 'index', 'action'=>'addposts'),
+    '/admin/' =>array('controller' => 'admin', 'action'=>'index'),
+    '/admin' =>array('controller' => 'admin', 'action'=>'index'),
+    '/login' => array('controller' => 'index', 'action'=>'login'),
+    '/logout' => array('controller' => 'index', 'action'=>'logout'),
+    '/admin/upload' => array('controller' => 'admin', 'action'=>'upload'),
+    '/admin/upload2' => array('controller' => 'admin', 'action'=>'upload2'),
+    '/admin/backup' => array('controller' => 'admin', 'action'=>'backup'),
+    '/admin/recovery' => array('controller' => 'admin', 'action'=>'recovery'),
+    '/admin/showlist' => array('controller' => 'admin', 'action'=>'showlist'),
+    '/admin/create' => array('controller' => 'admin', 'action'=>'create'),
 );
-
 
 
 /*роутинг*/
 if (isset($_SERVER['REQUEST_URI'])){
     $real_uri = $_SERVER['REQUEST_URI'];
+    //echo $real_uri;
     if (($p = strpos($real_uri, '?')) === false){
         $uri = substr($real_uri, 0);
     }else{
@@ -67,19 +42,26 @@ if (isset($_SERVER['REQUEST_URI'])){
     if (strlen($root_dir) && strpos($uri, $root_dir) === 0){
         $uri = substr($uri, strlen($root_dir));
     }
-    if (isset($routes[$uri])){
-        if(is_array($routes[$uri])){
-            if (isset($routes[$uri][1]) && is_array($routes[$uri][1]))
-                foreach($routes[$uri][1] as $key => $val)
-                    $_GET[$key] = $val;
-            $require = '../' . $routes[$uri][0];
-        }else{
-            $require = '../' . $routes[$uri];
+    if (isset($routes[$uri]) && is_array($routes[$uri])){
+        if (isset($routes[$uri]['controller'])){
+            $controller_name = $routes[$uri]['controller'];
+        } else{
+            $controller_name = $routes['404']['controller'];
         }
     }else{
-        $require = '../' . $routes['404'];
+        $controller_name = $routes['404']['controller'];
     }
-    require_once ($require);
+
+    if (file_exists($controllers . DIRECTORY_SEPARATOR . $controller_name . '.php')) {
+        require_once ($controllers . DIRECTORY_SEPARATOR. $controller_name . '.php');
+        $controller_class_name = ucfirst($controller_name);
+        $controller_instance = new $controller_class_name();
+        $action = (isset($routes[$uri]['action']))? $routes[$uri]['action'] : 'index';
+
+        $controller_instance->$action();
+    }else{
+        throw new Exception('Controller class not exists!');
+    }
 }else{
     echo 'Access not allow';
 }

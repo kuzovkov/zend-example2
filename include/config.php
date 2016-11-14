@@ -33,7 +33,10 @@ $config = array(
 
     'path' => array(
         'library' => $root . '/include/Zend',
-        'root' => $root
+        'root' => $root,
+        'upload_dir' => 'upload',
+        'controllers_dir' => $root . '/src/controllers',
+        'models_dir' => $root . '/src/models',
         )
 );
 
