@@ -2,14 +2,14 @@
 
 <div id="objects-wrap">
     <div class="inner-object-wrap" id="inner-object-wrap">
-        {if isset($value)}
+        {if isset($value) && is_array($value)}
         {foreach $value as $obj}
-        <a href="#" id="{$obj['id']}" class="inner-object" title="Удалить">{$obj['name']}</a>
+            <a href="#" id="{$obj['id']}" class="inner-object" title="Удалить">{$obj['name']}</a>
         {/foreach}
         {/if}
     </div>
 
-    {$array_object = data['model']->getObjects()}
+    {$array_object = $data['model']->getObjects()}
     <hr/>
     Выберите из существующих:
     <div class="all-object-wrap">

@@ -59,21 +59,22 @@ class Admin extends Controller{
     public function create(){
         if (isset($_GET['entity'])){
             $entity = $_GET['entity'];
-            $model = $this->loadModel($entity);
+            $this->loadModel($entity);
             if ($_SERVER['REQUEST_METHOD'] == 'GET'){
-                $this->data['model'] = $model;
+                $this->data['model'] = $this->model;
             }else if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                 //print_r($req->post); exit();
                 foreach($_POST as $key => $val){
-                    if (array_key_exists($key, $model->schema_edit)){
-                        $model->set->{$key} = $val;
+                    if (array_key_exists($key, $this->model->schema_edit)){
+                        $this->model->set->{$key} = $val;
                     }
                 }
                 //print_r($model->set);exit();
-                $model->create();
+                $this->model->create();
                 header("Location: /admin/showlist/?entity=" . $entity);
             }
             $this->data['action'] = 'create';
+            $this->data['upload_dir'] = $this->config->path->upload_dir;
             echo $this->view->render('admin/crud/edit.tpl', array('data' => $this->data, 'login'=>$this->login));
         }else{
             header("Location: /admin");
@@ -85,26 +86,26 @@ class Admin extends Controller{
      * редактирование объекта сущности
      * */
     public function edit(){
-        if (isset($params[0]) && file_exists(Config::$entities_dir.'/'.$params[0].'.php') && isset($params[1])){
-            $class = $params[0] . 'Model';
-            $model = new $class();
-            $id = intval($params[1]);
-            $req = new Request();
-            if ($req->server['REQUEST_METHOD'] == 'GET'){
-                $object = $model->getOne(array('id'=>$id));
-                $this->data['model'] = $model;
+        if (isset($_GET['entity']) && isset($_GET['id'])){
+            $entity = $_GET['entity'];
+            $this->loadModel($entity);
+            $id = intval($_GET['id']);
+            if ($_SERVER['REQUEST_METHOD'] == 'GET'){
+                $object = $this->model->getOne($id);
+                $this->data['model'] = $this->model;
                 $this->data['object'] = $object;
                 $this->data['action'] = 'edit';
-            }else if ($req->server['REQUEST_METHOD'] == 'POST'){
-                foreach($req->post as $key => $val){
-                    if (array_key_exists($key, $model->schema_edit)){
-                        $model->set->{$key} = $val;
+                $this->data['upload_dir'] = $this->config->path->upload_dir;
+            }else if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+                foreach($_POST as $key => $val){
+                    if (array_key_exists($key, $this->model->schema_edit)){
+                        $this->model->set->{$key} = $val;
                     }
                 }
-                $model->update(array('id'=>$id));
-                header("Location: /admin/showlist/".$params[0]);
+                $this->model->update($id);
+                header("Location: /admin/showlist/?entity=".$entity);
             }
-            echo View::render('admin/crud/edit.html', array('data' => $this->data));
+            echo $this->view->render('admin/crud/edit.tpl', array('data' => $this->data, 'login'=> $this->login));
         }else{
             header("Location: /admin");
         }
@@ -115,20 +116,18 @@ class Admin extends Controller{
      * удаление объекта сущности
      * */
     public function delete(){
-        if (isset($params[0]) && is_string($params[0])){
-            $entity = $params[0];
-            if (isset($params[1]) && is_numeric($params[1])){
-                $id = intval($params[1]);
-                $model = $entity . 'Model';
-                $emod = new $model();
-                try{
-                    $emod->delete(array('id'=>$id));
-                }catch(Exception $ex){
-                    header("Location: /admin/showlist/".$entity);
-                }
+        if (isset($_GET['entity']) && isset($_GET['id'])){
+            $entity = $_GET['entity'];
+            $this->loadModel($entity);
+            $id = intval($_GET['id']);
+            try{
+                $this->model->delete($id);
+            }catch(Exception $ex){
+                header("Location: /admin/showlist/?entity=".$entity);
             }
+
         }
-        header("Location: /admin/showlist/".$entity);
+        header("Location: /admin/showlist/?entity=".$entity);
     }
 
 
@@ -374,6 +373,48 @@ class Admin extends Controller{
             if (file_exists('thumb_' . $fullname)) unlink('thumb_' . $fullname);
         }
         header('Location: ' . $_SERVER['HTTP_REFERER']);
+    }
+
+    /**
+     * добавление тега к статье
+     * @param $params массив параметров
+     */
+    public function addtag(){
+        if (isset($_GET['tag']) && isset($_GET['obj'])){
+            $post_id = intval($_GET['obj']);
+            $tag_id = intval($_GET['tag']);
+            $this->loadModel('Post');
+            $this->model->addTag($post_id, $tag_id);
+            echo $post_id, $tag_id;
+        }
+    }
+
+    /**
+     * удаление тега у статьи
+     * @param $params массив параметров
+     */
+    public function removetag(){
+        if (isset($_GET['tag']) && isset($_GET['obj'])){
+            $post_id = intval($_GET['obj']);
+            $tag_id = intval($_GET['tag']);
+            $this->loadModel('Post');
+            $this->model->removeTag($post_id, $tag_id);
+            echo $post_id, $tag_id;
+        }
+    }
+
+    /**
+     * вывод актуального состояния тегов
+     * @param $params массив параметров
+     */
+    public function showtags(){
+        if (isset($_GET['obj'])){
+            $post_id = intval($_GET['obj']);
+            $this->loadModel('Post');
+            $post_tags = $this->model->getTags($post_id);
+            $data = array('model' => $this->model);
+            echo $this->view->render('admin/crud/objects.tpl', array('data' => $data, 'value' => $post_tags));
+        }
     }
 
 

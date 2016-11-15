@@ -26,9 +26,14 @@ $routes = array(
     '/admin/recovery' => array('controller' => 'admin', 'action'=>'recovery'),
     '/admin/showlist' => array('controller' => 'admin', 'action'=>'showlist'),
     '/admin/create' => array('controller' => 'admin', 'action'=>'create'),
+    '/admin/edit' => array('controller' => 'admin', 'action'=>'edit'),
+    '/admin/delete' => array('controller' => 'admin', 'action'=>'delete'),
     '/admin/imglist' => array('controller' => 'admin', 'action'=>'imglist'),
     '/admin/delimages' => array('controller' => 'admin', 'action'=>'delimages'),
     '/admin/imglist_select' => array('controller' => 'admin', 'action'=>'imglist_select'),
+    '/admin/addtag' => array('controller' => 'admin', 'action'=>'addtag'),
+    '/admin/removetag' => array('controller' => 'admin', 'action'=>'removetag'),
+    '/admin/showtags' => array('controller' => 'admin', 'action'=>'showtags'),
 );
 
 

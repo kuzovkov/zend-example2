@@ -33,4 +33,17 @@ class Tag extends Model{
         $this->table = 'tag';
     }
 
+    /**
+     * переопределяем метод create для предотвращения
+     * создания одинаковых тегов
+     */
+    public function create(){
+        try{
+            parent::create();
+        }catch(Exception $e){
+
+        }
+
+    }
+
 }

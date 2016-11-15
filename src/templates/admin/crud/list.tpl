@@ -7,7 +7,7 @@
 <h3>{$data['model']->title}</h3>
 
 <p>
-<form method="get" action="/admin/create/{$data['model']->entity}">
+<form method="get" action="/admin/create/?entity={$data['model']->entity}">
     <button>Create New</button>
 </form>
 </p>
@@ -52,10 +52,10 @@
         {/if}
         {/foreach}
         <td>
-            <form onsubmit="return confirmDelete({$object['id']});" method="get" action="/admin/delete/{$data['model']->entity}/{$object['id']}"><button>Delete</button></form>
+            <a class="del-btn" id="del-{$object['id']}" href="/admin/delete/?entity={$data['model']->entity}&id={$object['id']}"><button>Delete</button></a>
         </td>
         <td>
-            <form method="get" action="/admin/edit/{$data['model']->entity}/{$object['id']}"><button>Edit</button></form>
+            <a href="/admin/edit/?entity={$data['model']->entity}&id={$object['id']}"><button>Edit</button></a>
         </td>
 
     </tr>
@@ -70,6 +70,14 @@
 {block "bottom_js"}
 <script type="text/javascript">
     App.switchMenu('home');
+
+    $('.del-btn').click(function(event){
+        //event.preventDefault();
+        var id = this.id.split('-').pop();
+        if (!confirmDelete(id)){
+            event.preventDefault();
+        }
+    });
 
     function confirmDelete(id){
         return confirm('Would you like delete item ' + id);

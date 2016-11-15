@@ -9,7 +9,7 @@
                     <p><a href="/admin/showlist/?entity={$model->entity}">{$model->title}</a></p>
                 </td>
                 <td>
-                    <p><a href="""/admin/create/?entity={$model->entity}"><button>Create New</button></a</p>
+                    <p><a href="/admin/create/?entity={$model->entity}"><button>Create New</button></a</p>
                 </td>
 
                 <td>
