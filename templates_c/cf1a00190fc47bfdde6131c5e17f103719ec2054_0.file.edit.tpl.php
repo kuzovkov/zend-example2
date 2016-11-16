@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2016-11-15 23:47:08
+/* Smarty version 3.1.30, created on 2016-11-16 20:27:52
   from "/var/www/vhosts/test5/src/templates/admin/crud/edit.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_582b744c72f250_00588368',
+  'unifunc' => 'content_582c97182de056_04306805',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cf1a00190fc47bfdde6131c5e17f103719ec2054' => 
     array (
       0 => '/var/www/vhosts/test5/src/templates/admin/crud/edit.tpl',
-      1 => 1479242825,
+      1 => 1479317269,
       2 => 'file',
     ),
   ),
@@ -25,24 +25,24 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:admin/crud/select_image.tpl' => 1,
   ),
 ),false)) {
-function content_582b744c72f250_00588368 (Smarty_Internal_Template $_smarty_tpl) {
+function content_582c97182de056_04306805 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/var/www/vhosts/test5/include/Smarty/plugins/modifier.date_format.php';
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_2114228192582b744c720de1_30334508', "content");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_1626968956582c97182cb738_75053514', "content");
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_2009819625582b744c72d798_32079357', "bottom_js");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_1674736737582c97182dc4e8_83610875', "bottom_js");
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:admin/layout.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block "content"} */
-class Block_2114228192582b744c720de1_30334508 extends Smarty_Internal_Block
+class Block_1626968956582c97182cb738_75053514 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -202,8 +202,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 
         <?php } elseif ($_smarty_tpl->tpl_vars['data']->value['model']->schema_edit[$_smarty_tpl->tpl_vars['col']->value]['type'] == 'img') {?>
 
-
-            <img id="img-preview" width="100" height="75"  src="<?php if ('value' == '') {?>/<?php echo $_smarty_tpl->tpl_vars['data']->value['upload_dir'];?>
+            <img id="img-preview" width="100" height="75"  src="<?php if ($_smarty_tpl->tpl_vars['value']->value == '') {?>/<?php echo $_smarty_tpl->tpl_vars['data']->value['upload_dir'];?>
 /default.png<?php } else { ?>/<?php echo $_smarty_tpl->tpl_vars['data']->value['upload_dir'];?>
 /<?php echo $_smarty_tpl->tpl_vars['value']->value;
 }?>" <?php if (isset($_smarty_tpl->tpl_vars['data']->value['model']->schema_edit[$_smarty_tpl->tpl_vars['col']->value]['class'])) {?> class="<?php echo $_smarty_tpl->tpl_vars['data']->value['model']->schema_edit[$_smarty_tpl->tpl_vars['col']->value]['class'];?>
@@ -259,7 +258,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 }
 /* {/block "content"} */
 /* {block "bottom_js"} */
-class Block_2009819625582b744c72d798_32079357 extends Smarty_Internal_Block
+class Block_1674736737582c97182dc4e8_83610875 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>

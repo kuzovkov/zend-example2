@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2016-11-15 23:53:28
+/* Smarty version 3.1.30, created on 2016-11-16 20:25:03
   from "/var/www/vhosts/test5/src/templates/admin/crud/list.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_582b75c81d1cc8_75211402',
+  'unifunc' => 'content_582c966f5fb1f7_96423038',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '16df6086ed42733e2c960c73b228b0f9c6d4ab97' => 
     array (
       0 => '/var/www/vhosts/test5/src/templates/admin/crud/list.tpl',
-      1 => 1479243204,
+      1 => 1479317097,
       2 => 'file',
     ),
   ),
@@ -21,24 +21,24 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:admin/layout.tpl' => 1,
   ),
 ),false)) {
-function content_582b75c81d1cc8_75211402 (Smarty_Internal_Template $_smarty_tpl) {
+function content_582c966f5fb1f7_96423038 (Smarty_Internal_Template $_smarty_tpl) {
 if (!is_callable('smarty_modifier_date_format')) require_once '/var/www/vhosts/test5/include/Smarty/plugins/modifier.date_format.php';
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_1537023946582b75c81c75a2_29846902', "content");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_690286898582c966f5f0e78_45710465', "content");
 ?>
 
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_118326458582b75c81d00b6_50915032', "bottom_js");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_749087913582c966f5f98b0_36041173', "bottom_js");
 $_smarty_tpl->inheritance->endChild();
 $_smarty_tpl->_subTemplateRender("file:admin/layout.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 2, false);
 }
 /* {block "content"} */
-class Block_1537023946582b75c81c75a2_29846902 extends Smarty_Internal_Block
+class Block_690286898582c966f5f0e78_45710465 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
@@ -52,10 +52,10 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 </h3>
 
 <p>
-<form method="get" action="/admin/create/?entity=<?php echo $_smarty_tpl->tpl_vars['data']->value['model']->entity;?>
+<a href="/admin/create/?entity=<?php echo $_smarty_tpl->tpl_vars['data']->value['model']->entity;?>
 ">
     <button>Create New</button>
-</form>
+</a>
 </p>
 <table class="table">
     <tr>
@@ -183,7 +183,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 }
 /* {/block "content"} */
 /* {block "bottom_js"} */
-class Block_118326458582b75c81d00b6_50915032 extends Smarty_Internal_Block
+class Block_749087913582c966f5f98b0_36041173 extends Smarty_Internal_Block
 {
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>

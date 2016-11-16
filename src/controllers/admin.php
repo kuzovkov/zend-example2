@@ -34,16 +34,16 @@ class Admin extends Controller{
         if (isset($_GET['entity'])){
             $entity = $_GET['entity'];
             $this->loadModel($entity);
-            if (isset($_GET['col']) && array_key_exists($_GET['col'],$this->model->schema_list)){
+            if (isset($_GET['col']) && array_key_exists($_GET['col'],$this->model->{$entity}->schema_list)){
                 $order = (isset($_GET['order']) && in_array($_GET['order'], array('ASC','DESC')))? $_GET['order'] : 'ASC';
-                $list = $this->model->getlist(array($_GET['col']=>$order));
+                $list = $this->model->{$entity}->getlist(array($_GET['col']=>$order));
                 $this->data['order'] = ($order == 'ASC')? 'DESC' : 'ASC';
             }else
             {
-                $list = $this->model->getlist();
+                $list = $this->model->{$entity}->getlist();
             }
             $this->data['list'] = $list;
-            $this->data['model'] = $this->model;
+            $this->data['model'] = $this->model->{$entity};
             $this->data['upload_dir'] = $this->config->path->upload_dir;
             echo $this->view->render('admin/crud/list.tpl', array('data' => $this->data, 'login'=>$this->login, ));
         }else{
@@ -61,16 +61,16 @@ class Admin extends Controller{
             $entity = $_GET['entity'];
             $this->loadModel($entity);
             if ($_SERVER['REQUEST_METHOD'] == 'GET'){
-                $this->data['model'] = $this->model;
+                $this->data['model'] = $this->model->{$entity};
             }else if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                 //print_r($req->post); exit();
                 foreach($_POST as $key => $val){
-                    if (array_key_exists($key, $this->model->schema_edit)){
-                        $this->model->set->{$key} = $val;
+                    if (array_key_exists($key, $this->model->{$entity}->schema_edit)){
+                        $this->model->{$entity}->set->{$key} = $val;
                     }
                 }
                 //print_r($model->set);exit();
-                $this->model->create();
+                $this->model->{$entity}->create();
                 header("Location: /admin/showlist/?entity=" . $entity);
             }
             $this->data['action'] = 'create';
@@ -91,18 +91,18 @@ class Admin extends Controller{
             $this->loadModel($entity);
             $id = intval($_GET['id']);
             if ($_SERVER['REQUEST_METHOD'] == 'GET'){
-                $object = $this->model->getOne($id);
-                $this->data['model'] = $this->model;
+                $object = $this->model->{$entity}->getOne($id);
+                $this->data['model'] = $this->model->{$entity};
                 $this->data['object'] = $object;
                 $this->data['action'] = 'edit';
                 $this->data['upload_dir'] = $this->config->path->upload_dir;
             }else if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                 foreach($_POST as $key => $val){
-                    if (array_key_exists($key, $this->model->schema_edit)){
-                        $this->model->set->{$key} = $val;
+                    if (array_key_exists($key, $this->model->{$entity}->schema_edit)){
+                        $this->model->{$entity}->set->{$key} = $val;
                     }
                 }
-                $this->model->update($id);
+                $this->model->{$entity}->update($id);
                 header("Location: /admin/showlist/?entity=".$entity);
             }
             echo $this->view->render('admin/crud/edit.tpl', array('data' => $this->data, 'login'=> $this->login));
@@ -121,7 +121,7 @@ class Admin extends Controller{
             $this->loadModel($entity);
             $id = intval($_GET['id']);
             try{
-                $this->model->delete($id);
+                $this->model->{$entity}->delete($id);
             }catch(Exception $ex){
                 header("Location: /admin/showlist/?entity=".$entity);
             }
@@ -384,7 +384,7 @@ class Admin extends Controller{
             $post_id = intval($_GET['obj']);
             $tag_id = intval($_GET['tag']);
             $this->loadModel('Post');
-            $this->model->addTag($post_id, $tag_id);
+            $this->model->Post->addTag($post_id, $tag_id);
             echo $post_id, $tag_id;
         }
     }
@@ -398,7 +398,7 @@ class Admin extends Controller{
             $post_id = intval($_GET['obj']);
             $tag_id = intval($_GET['tag']);
             $this->loadModel('Post');
-            $this->model->removeTag($post_id, $tag_id);
+            $this->model->Post->removeTag($post_id, $tag_id);
             echo $post_id, $tag_id;
         }
     }
@@ -411,8 +411,8 @@ class Admin extends Controller{
         if (isset($_GET['obj'])){
             $post_id = intval($_GET['obj']);
             $this->loadModel('Post');
-            $post_tags = $this->model->getTags($post_id);
-            $data = array('model' => $this->model);
+            $post_tags = $this->model->Post->getTags($post_id);
+            $data = array('model' => $this->model->Post);
             echo $this->view->render('admin/crud/objects.tpl', array('data' => $data, 'value' => $post_tags));
         }
     }

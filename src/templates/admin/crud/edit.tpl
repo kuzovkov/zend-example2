@@ -88,8 +88,7 @@
 
         {elseif $data['model']->schema_edit[$col]['type'] == 'img'}
 
-
-            <img id="img-preview" width="100" height="75"  src="{if value == ''}/{$data['upload_dir']}/default.png{else}/{$data['upload_dir']}/{$value}{/if}" {if isset($data['model']->schema_edit[$col]['class'])} class="{$data['model']->schema_edit[$col]['class']}" {/if}/>
+            <img id="img-preview" width="100" height="75"  src="{if $value == ''}/{$data['upload_dir']}/default.png{else}/{$data['upload_dir']}/{$value}{/if}" {if isset($data['model']->schema_edit[$col]['class'])} class="{$data['model']->schema_edit[$col]['class']}" {/if}/>
             <input type="hidden" name="{$col}" value="{$value}" id="img-value"/>
             <a href="#" id="open-images">Изображения</a>
 

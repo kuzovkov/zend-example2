@@ -7,9 +7,9 @@
 <h3>{$data['model']->title}</h3>
 
 <p>
-<form method="get" action="/admin/create/?entity={$data['model']->entity}">
+<a href="/admin/create/?entity={$data['model']->entity}">
     <button>Create New</button>
-</form>
+</a>
 </p>
 <table class="table">
     <tr>

@@ -6,6 +6,8 @@
  * Time: 17:34
  */
 
+class Mod{}
+
 class Controller{
     
     protected $view = null;
@@ -15,14 +17,15 @@ class Controller{
     public function __construct(){
         $this->view = new View();
         $this->config = Zend_Registry::get('config');
+        $this->model = new Mod();
     }
     
     public function loadModel($name){
         $filename = $this->config->path->models_dir . DIRECTORY_SEPARATOR . strtolower($name) . '.php';
         if (file_exists($filename)){
             require_once ($filename);
-            $this->model = null;
-            $this->model = new $name();
+            $this->model->{$name} = null;
+            $this->model->{$name} = new $name();
         }else{
             throw new Exception("Model $name does't exists!");
         }

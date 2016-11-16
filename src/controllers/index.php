@@ -11,7 +11,7 @@
         public function index(){
             $limit = 5;
             $this->loadModel('Post');
-            $posts = $this->model->getPosts($limit);
+            $posts = $this->model->Post->getPosts($limit);
             echo $this->view->render('index.tpl', array('posts'=>$posts, 'upload_dir' => $this->config->path->upload_dir));
         } 
         
@@ -19,7 +19,7 @@
             $limit = 5;
             $n = (isset($_GET['n']))? intval($_GET['n']) : 0;
             $this->loadModel('Post');
-            $posts = $this->model->getNextPosts($limit, $n);
+            $posts = $this->model->Post->getNextPosts($limit, $n);
             echo $this->view->render('posts.tpl', array('posts'=>$posts, 'upload_dir' => $this->config->path->upload_dir));
         }
 
